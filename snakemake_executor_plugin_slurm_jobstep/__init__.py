@@ -156,7 +156,7 @@ class Executor(RealExecutor):
 
 
 def get_cpus_per_task(job: JobExecutorInterface):
-    cpus_per_task = job.threads
+    cpus_per_task = getattr(jobs.resources, 'threads', job.threads)
     if job.resources.get("cpus_per_task"):
         if not isinstance(cpus_per_task, int):
             raise WorkflowError(
